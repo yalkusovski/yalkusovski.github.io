@@ -1,0 +1,107 @@
+class CustomContactCard extends HTMLElement {
+    connectedCallback() {
+        this.attachShadow({ mode: 'open' });
+        this.shadowRoot.innerHTML = `
+            <style>
+                :host {
+                    display: block;
+                }
+                
+                .contact-card {
+                    background-color: white;
+                    border-radius: 0.75rem;
+                    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                    padding: 1.5rem;
+                }
+                
+                .contact-card h3 {
+                    font-size: 1.25rem;
+                    font-weight: 600;
+                    margin-bottom: 1.5rem;
+                    color: #1e293b;
+                }
+                
+                .contact-info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                }
+                
+                .contact-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+                
+                .contact-icon {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 2.5rem;
+                    height: 2.5rem;
+                    border-radius: 50%;
+                    background-color: #e0f2fe;
+                    color: #0369a1;
+                }
+                
+                .contact-details {
+                    flex: 1;
+                }
+                
+                .contact-label {
+                    font-size: 0.875rem;
+                    color: #64748b;
+                }
+                
+                .contact-value {
+                    font-weight: 500;
+                    color: #1e293b;
+                    word-break: break-all;
+                }
+            </style>
+            <div class="contact-card">
+                <h3>Contact Details</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-feather="mail"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Email</div>
+                            <div class="contact-value">yalkusovski@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-feather="phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Phone</div>
+                            <div class="contact-value">(+60) 146353392</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-feather="map-pin"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Address</div>
+                            <div class="contact-value">St.Mary Residence 1, Jalan Tengah, 50250 Kuala Lumpur (Malaysia)</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i data-feather="globe"></i>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Nationality</div>
+                            <div class="contact-value">Macedonian/citizen of the Republic of North Macedonia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+customElements.define('custom-contact-card', CustomContactCard);

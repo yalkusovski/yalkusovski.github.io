@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jane Alkushovski | IT Leader Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/contact-card.js"></script>
+    <script src="components/experience-card.js"></script>
+    <script src="components/skill-pill.js"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <custom-navbar></custom-navbar>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="flex flex-col md:flex-row items-center justify-between gap-8 mb-16">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Jane Alkushovski</h1>
+                <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-blue-600">IT Infrastructure & Digital Transformation Leader</h2>
+                <p class="text-lg mb-8 text-gray-600 leading-relaxed">
+                    Strategic and results-driven professional with extensive experience in managing enterprise IT infrastructure, 
+                    office digitalization, and end-to-end software development.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#contact" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Contact Me
+                    </a>
+                    <a href="#experience" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        View Experience
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-blue-100 shadow-xl">
+                    <img src="http://static.photos/technology/640x360/88" alt="Professional Portrait" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">About Me</h2>
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    Strategic and results-driven IT Infrastructure & Digital Transformation Leader with extensive experience in managing
+                    enterprise IT infrastructure, office digitalization, and end-to-end software development. Expertise in cloud
+                    computing, AI-driven solutions, and digital twin technologies, driving innovation in telecom, cybersecurity, and
+                    enterprise automation.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Proven ability to lead cross-functional teams, execute complex IT projects, and optimize IT
+                    operations using Agile methodologies, SDLC, and DevOps practices. Passionate about leveraging AI, cloud, and
+                    emerging technologies to enhance business agility, customer experience, and operational efficiency.
+                </p>
+            </div>
+        </section>
+
+        <!-- Industry Expertise -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">Industry Expertise</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="server" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">IT Infrastructure & Enterprise Solutions</h3>
+                    <p class="text-gray-600">Leading large-scale IT transformation projects</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="code" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Software Development & AI Solutions</h3>
+                    <p class="text-gray-600">Application development, AI-driven automation, and digital twin technologies.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="package" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Enterprise Product Management</h3>
+                    <p class="text-gray-600">Leading end-to-end product lifecycles in telecom, cybersecurity, and fintech.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="cloud" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cloud & Network Solutions</h3>
+                    <p class="text-gray-600">Expertise in AWS, hybrid cloud, network security, and infrastructure optimization.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="refresh-cw" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Agile & DevOps Methodologies</h3>
+                    <p class="text-gray-600">Driving SDLC efficiency, CI/CD pipelines, and Agile project execution.</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition duration-300">
+                    <div class="text-blue-600 mb-4">
+                        <i data-feather="shield" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cybersecurity & Compliance</h3>
+                    <p class="text-gray-600">Implementing security frameworks, risk management, and regulatory compliance.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">Work Experience</h2>
+            <div class="space-y-8">
+                <custom-experience-card 
+                    title="Vice President - Product & Enterprise" 
+                    company="Orient Telecoms" 
+                    duration="06/2024 – Current" 
+                    location="Malaysia"
+                    icon="briefcase">
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Drive IT infrastructure modernization and enterprise-wide digital transformation.</li>
+                        <li>Lead software development, cloud-based network solutions, and AI-driven digital twin innovations.</li>
+                        <li>Oversee enterprise cloud architecture and cybersecurity frameworks for scalable IT solutions.</li>
+                        <li>Foster a high-performance IT culture by mentoring teams and promoting Agile methodologies.</li>
+                        <li>Define and execute IT strategies that align with long-term business goals and market trends.</li>
+                    </ul>
+                </custom-experience-card>
+
+                <custom-experience-card 
+                    title="Product Manager" 
+                    company="Orient Telecoms" 
+                    duration="05/2023 – 05/2024" 
+                    location="Kuala Lumpur, Malaysia"
+                    icon="clipboard">
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Managed Agile-driven product lifecycles for enterprise software and digital solutions.</li>
+                        <li>Led backlog refinement, sprint planning, and cross-functional collaboration to accelerate development cycles.</li>
+                        <li>Championed Scrum methodologies, ensuring seamless integration between business needs and technical execution.</li>
+                        <li>Enhanced cloud security, compliance frameworks, and network infrastructure optimizations.</li>
+                    </ul>
+                </custom-experience-card>
+
+                <custom-experience-card 
+                    title="Head of Business Development" 
+                    company="Pecunia Asset Management" 
+                    duration="11/2016 – 04/2023" 
+                    location="Kuala Lumpur, Malaysia"
+                    icon="trending-up">
+                    <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                        <li>Led a team of professionals in driving sales of wealth management investment products.</li>
+                        <li>Managed software development teams responsible for maintaining and enhancing investment platforms.</li>
+                        <li>Oversaw the seamless operation of digital trading platforms, enabling clients to trade efficiently.</li>
+                        <li>Collaborated with developers to enhance platform security, performance, and user experience.</li>
+                    </ul>
+                </custom-experience-card>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">Education & Certifications</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-2">Master's Degree, Information Technology</h3>
+                    <p class="text-gray-600 mb-1">INTI International University | 01/2025 – 03/2026</p>
+                    <p class="text-gray-500">Field: Information and Communication Technologies</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-2">Bachelor's Degree, International Tourism & Marketing</h3>
+                    <p class="text-gray-600 mb-1">IMI International Management Institute Switzerland | 2009</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-2">AWS Certified Solutions Architect – Associate</h3>
+                    <p class="text-gray-600 mb-1">Amazon Web Services (AWS) | 2023</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-2">Certified in Cybersecurity (CC)</h3>
+                    <p class="text-gray-600 mb-1">ISC2 | 2023</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">Technical Skills</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Software & IT Infrastructure</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <custom-skill-pill>Cloud computing</custom-skill-pill>
+                        <custom-skill-pill>Enterprise IT modernization</custom-skill-pill>
+                        <custom-skill-pill>Digital transformation</custom-skill-pill>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Cloud Technologies</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <custom-skill-pill>AWS</custom-skill-pill>
+                        <custom-skill-pill>Hybrid cloud</custom-skill-pill>
+                        <custom-skill-pill>Virtualization</custom-skill-pill>
+                        <custom-skill-pill>Network security</custom-skill-pill>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4">Software Development & AI</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <custom-skill-pill>AI-driven automation</custom-skill-pill>
+                        <custom-skill-pill>Digital twins</custom-skill-pill>
+                        <custom-skill-pill>Application development</custom-skill-pill>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="mb-16 scroll-mt-16">
+            <h2 class="text-3xl font-bold mb-8 text-gray-900 border-b-2 border-blue-100 pb-2">Contact Information</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <custom-contact-card></custom-contact-card>
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-xl font-semibold mb-4">Send Me a Message</h3>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-gray-700 mb-1">Name</label>
+                            <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 mb-1">Message</label>
+                            <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        feather.replace();
+    </script>
+    <script src="script.js"></script>
+<script src="https://huggingface.co/deepsite/deepsite-badge.js"></script>
+</body>
+</html>
