@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jane Alkushovski — VP Product & Technology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0a0e1a;
+    --deep: #0d1426;
+    --card: #111827;
+    --border: rgba(255,255,255,0.07);
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: rgba(201,168,76,0.15);
+    --white: #f0ece4;
+    --muted: #8892a4;
+    --accent: #4a9eff;
+    --glow: rgba(201,168,76,0.08);
+  }
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  html { scroll-behavior: smooth; }
+ 
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+ 
+  /* Custom cursor */
+  .cursor {
+    position: fixed; width: 10px; height: 10px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease, opacity 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.25s ease, width 0.3s, height 0.3s;
+  }
+  body:hover .cursor { opacity: 1; }
+ 
+  /* Noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none; opacity: 0.4;
+  }
+ 
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 4rem;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s, background 0.4s, backdrop-filter 0.4s;
+  }
+  nav.scrolled {
+    border-color: var(--border);
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(20px);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    color: var(--gold);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px; background: var(--gold);
+    transition: width 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-links a:hover::after { width: 100%; }
+ 
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 75% 50%, rgba(201,168,76,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(74,158,255,0.04) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+ 
+  .hero-left { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.9s 0.35s forwards;
+  }
+  .hero-name span { font-style: italic; color: var(--gold); }
+  .hero-title {
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
+  }
+  .hero-desc {
+    font-size: 0.8rem; line-height: 1.9;
+    color: var(--muted); max-width: 480px; margin-bottom: 3rem;
+    opacity: 0; animation: fadeUp 0.9s 0.65s forwards;
+  }
+  .hero-cta {
+    display: flex; gap: 1.2rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
+  }
+  .btn-primary {
+    padding: 0.85rem 2.2rem;
+    background: var(--gold); color: var(--navy);
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; border: none; cursor: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    padding: 0.85rem 2.2rem;
+    border: 1px solid var(--border); color: var(--white);
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    text-decoration: none; cursor: none;
+    transition: border-color 0.3s, color 0.3s, transform 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+ 
+  .hero-right {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+    opacity: 0; animation: fadeIn 1.2s 0.6s forwards;
+  }
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 3rem;
+    position: relative;
+    width: 100%; max-width: 420px;
+  }
+  .hero-card::before {
+    content: ''; position: absolute;
+    top: -1px; left: 2rem; right: 2rem; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .stat-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .stat { }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: var(--gold); line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); line-height: 1.4;
+  }
+  .hero-card-divider {
+    height: 1px; background: var(--border);
+    margin: 2rem 0;
+  }
+  .contact-row {
+    display: flex; flex-direction: column; gap: 0.8rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.8rem;
+    font-size: 0.72rem; color: var(--muted);
+  }
+  .contact-item .icon {
+    width: 28px; height: 28px;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; color: var(--gold); flex-shrink: 0;
+  }
+ 
+  /* SECTION COMMON */
+  section { position: relative; z-index: 1; }
+  .section-inner { max-width: 1200px; margin: 0 auto; padding: 7rem 4rem; }
+  .section-label {
+    font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 60px; }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.1;
+    margin-bottom: 4rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+ 
+  /* SKILLS */
+  .skills-section { background: var(--deep); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 4rem;
+  }
+  .skill-cat {
+    background: var(--card); padding: 2.5rem;
+    transition: background 0.3s;
+  }
+  .skill-cat:hover { background: #161d2e; }
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    font-size: 0.65rem; letter-spacing: 0.08em;
+    color: var(--muted); transition: border-color 0.3s, color 0.3s;
+  }
+  .skill-tag:hover { border-color: var(--gold); color: var(--white); }
+ 
+  /* EXPERIENCE */
+  .experience-section { background: var(--navy); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute;
+    left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .timeline-item {
+    padding-left: 3rem; margin-bottom: 4.5rem;
+    position: relative;
+    opacity: 0; transform: translateX(-20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+  .timeline-dot {
+    position: absolute; left: -5px; top: 0.4rem;
+    width: 11px; height: 11px;
+    border: 2px solid var(--gold);
+    background: var(--navy);
+    transform: rotate(45deg);
+  }
+  .timeline-period {
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.5rem;
+  }
+  .timeline-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
+  .timeline-company {
+    font-family: 'Syne', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .timeline-company span {
+    font-weight: 300; font-family: 'DM Mono'; text-transform: none;
+    letter-spacing: 0; color: rgba(136,146,164,0.6); font-size: 0.68rem;
+  }
+  .timeline-bullets {
+    list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  .timeline-bullets li {
+    font-size: 0.76rem; color: var(--muted); line-height: 1.7;
+    padding-left: 1.2rem; position: relative;
+  }
+  .timeline-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--gold); font-size: 0.7rem;
+  }
+ 
+  /* EDUCATION & CERTS */
+  .edu-section { background: var(--deep); }
+  .edu-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 2rem; margin-bottom: 4rem;
+  }
+  .edu-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 2.5rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .edu-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.4s;
+  }
+  .edu-card:hover { border-color: rgba(201,168,76,0.3); }
+  .edu-card:hover::after { transform: scaleX(1); }
+  .edu-year {
+    font-size: 0.62rem; letter-spacing: 0.2em; color: var(--gold);
+    margin-bottom: 0.8rem; text-transform: uppercase;
+  }
+  .edu-degree {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 400;
+    margin-bottom: 0.4rem;
+  }
+  .edu-institution {
+    font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em;
+  }
+ 
+  .cert-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .cert-item {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.5rem;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .cert-item:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-3px); }
+  .cert-org {
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .cert-name {
+    font-size: 0.72rem; line-height: 1.5; color: var(--white);
+  }
+ 
+  /* ABOUT / LANGUAGES */
+  .about-section { background: var(--navy); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: start;
+  }
+  .lang-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .lang-item { }
+  .lang-header {
+    display: flex; justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+  }
+  .lang-name { color: var(--white); }
+  .lang-level { color: var(--gold); }
+  .lang-bar {
+    height: 2px; background: var(--border); position: relative;
+  }
+  .lang-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    transition: width 1s ease;
+  }
+ 
+  .info-list { display: flex; flex-direction: column; gap: 1.2rem; }
+  .info-item {
+    display: flex; gap: 1.5rem;
+    padding-bottom: 1.2rem; border-bottom: 1px solid var(--border);
+    font-size: 0.75rem;
+  }
+  .info-item:last-child { border-bottom: none; }
+  .info-key {
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold); min-width: 100px;
+  }
+  .info-val { color: var(--muted); line-height: 1.6; }
+ 
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid var(--border);
+    padding: 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 2rem;
+    position: relative; z-index: 1;
+  }
+  .footer-left { }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 300;
+    margin-bottom: 0.3rem;
+  }
+  .footer-subtitle { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+  .footer-links {
+    display: flex; gap: 2rem; list-style: none;
+  }
+  .footer-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { color: rgba(136,146,164,0.4); font-size: 0.65rem; }
+ 
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+ 
+  /* REVEAL on scroll */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+ 
+  /* Floating orb */
+  .orb {
+    position: absolute; border-radius: 50%;
+    filter: blur(80px); pointer-events: none;
+    animation: drift 8s ease-in-out infinite alternate;
+  }
+  .orb-1 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(201,168,76,0.07), transparent);
+    top: 10%; right: -100px;
+  }
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(74,158,255,0.05), transparent);
+    bottom: 20%; left: -80px;
+  }
+  @keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(20px, -30px); }
+  }
+ 
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 4rem; gap: 4rem; }
+    .hero-right { display: none; }
+    .section-inner { padding: 5rem 2rem; }
+    nav { padding: 1.2rem 2rem; }
+    .nav-links { display: none; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .cert-grid { grid-template-columns: 1fr 1fr; }
+    .edu-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    footer { flex-direction: column; padding: 3rem 2rem; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+ 
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">JA.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+ 
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+ 
+  <div class="hero-left">
+    <div class="hero-eyebrow">VP Product &amp; Technology</div>
+    <h1 class="hero-name">Jane<br><span>Alkushovski</span></h1>
+    <div class="hero-title">Telecom Infrastructure · Cloud Platforms · Enterprise Connectivity · AWS</div>
+    <p class="hero-desc">
+      Product and Technology Leader with 10+ years of experience delivering enterprise platforms,
+      telecom infrastructure and advanced computing solutions across telecom and fintech industries.
+      Specialized in cloud architecture, AI solutions, and Agile product development.
+    </p>
+    <div class="hero-cta">
+      <a href="mailto:yalkusovski@gmail.com" class="btn-primary">Get in Touch</a>
+      <a href="#experience" class="btn-outline">View Experience</a>
+    </div>
+  </div>
+ 
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="stat-grid">
+        <div class="stat">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Years of<br>Leadership</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">AWS<br>Certifications</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">VP</div>
+          <div class="stat-label">Current<br>Role</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">MY</div>
+          <div class="stat-label">Based in<br>Kuala Lumpur</div>
+        </div>
+      </div>
+      <div class="hero-card-divider"></div>
+      <div class="contact-row">
+        <div class="contact-item">
+          <div class="icon">✉</div>
+          yalkusovski@gmail.com
+        </div>
+        <div class="contact-item">
+          <div class="icon">✆</div>
+          (+60) 146353392
+        </div>
+        <div class="contact-item">
+          <div class="icon">in</div>
+          linkedin.com/in/jane-a-18303b16b
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- SKILLS -->
+<section class="skills-section" id="skills">
+  <div class="section-inner">
+    <div class="section-label reveal">Technical Expertise</div>
+    <h2 class="section-title reveal">Core <em>Competencies</em></h2>
+ 
+    <div class="skills-grid reveal">
+      <div class="skill-cat">
+        <div class="skill-cat-title">Cloud &amp; Infrastructure</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS EC2</span><span class="skill-tag">S3</span>
+          <span class="skill-tag">VPC</span><span class="skill-tag">RDS</span>
+          <span class="skill-tag">Lambda</span>
+          <span class="skill-tag">Hybrid Cloud</span>
+          <span class="skill-tag">Network Security</span>
+          <span class="skill-tag">Virtualization</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Telecom &amp; Network</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DIA</span><span class="skill-tag">MPLS</span>
+          <span class="skill-tag">SD-WAN</span><span class="skill-tag">Metro-E</span>
+          <span class="skill-tag">BGP Routing</span>
+          <span class="skill-tag">Enterprise WAN</span>
+          <span class="skill-tag">IP Transit</span>
+          <span class="skill-tag">Broadband</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">AI &amp; Advanced Computing</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AI Platforms</span>
+          <span class="skill-tag">HPC Infrastructure</span>
+          <span class="skill-tag">Supercomputing</span>
+          <span class="skill-tag">Data Analytics</span>
+          <span class="skill-tag">AI Automation</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Product &amp; Management</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Product Strategy</span>
+          <span class="skill-tag">Roadmapping</span>
+          <span class="skill-tag">Agile / Scrum</span>
+          <span class="skill-tag">DevOps</span>
+          <span class="skill-tag">Backlog Mgmt</span>
+          <span class="skill-tag">Sprint Planning</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Security &amp; Compliance</div>
+        <div class="skill-tags">
+          <span class="skill-tag">IAM</span><span class="skill-tag">SOC2</span>
+          <span class="skill-tag">ISO27001</span>
+          <span class="skill-tag">Cybersecurity</span>
+          <span class="skill-tag">Enterprise Security</span>
+        </div>
+      </div>
+      <div class="skill-cat">
+        <div class="skill-cat-title">Data &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span><span class="skill-tag">SQL</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Jira</span><span class="skill-tag">Confluence</span>
+          <span class="skill-tag">Asana</span><span class="skill-tag">Trello</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- EXPERIENCE -->
+<section class="experience-section" id="experience">
+  <div class="section-inner">
+    <div class="section-label reveal">Career History</div>
+    <h2 class="section-title reveal">Work <em>Experience</em></h2>
+ 
+    <div class="timeline">
+ 
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jun 2024 — Present</div>
+        <div class="timeline-role">Vice President — Product &amp; Technology</div>
+        <div class="timeline-company">Orient Telecoms <span>· Kuala Lumpur, Malaysia · Telecom &amp; ICT</span></div>
+        <ul class="timeline-bullets">
+          <li>Oversee strategic technology initiatives involving AI infrastructure, data platforms and advanced computing resources supporting next-generation digital services.</li>
+          <li>Lead the development and delivery of enterprise connectivity solutions including DIA, MPLS, Metro-E, Broadband and SD-WAN services for enterprise and carrier customers.</li>
+          <li>Oversee the architecture and deployment of AI-driven platforms and advanced computing infrastructure, including HPC environments and supercomputing capabilities.</li>
+          <li>Manage cross-functional teams across product management, engineering, infrastructure, and data teams, driving innovation across telecom, cloud and AI initiatives.</li>
+          <li>Define and execute product roadmaps for next-generation digital platforms integrating telecom infrastructure, cloud services and AI technologies.</li>
+          <li>Implement Agile and Scrum development frameworks across engineering and product teams to accelerate development cycles and improve delivery efficiency.</li>
+          <li>Lead enterprise infrastructure modernization initiatives integrating cloud architecture, network services and AI-driven automation.</li>
+        </ul>
+      </div>
+ 
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">May 2023 — May 2024</div>
+        <div class="timeline-role">Product Manager</div>
+        <div class="timeline-company">Orient Telecoms <span>· Kuala Lumpur, Malaysia · Telecom &amp; ICT</span></div>
+        <ul class="timeline-bullets">
+          <li>Owned product roadmap and lifecycle for enterprise digital platforms serving telecom and enterprise clients.</li>
+          <li>Led Agile product development cycles including backlog management, sprint planning, and cross-functional coordination between engineering and business teams.</li>
+          <li>Championed Scrum methodologies, ensuring seamless integration between business needs and technical execution.</li>
+          <li>Improved cloud infrastructure security and compliance frameworks across enterprise platforms.</li>
+          <li>Collected and analyzed user insights to drive iterative improvements and maintain market competitiveness.</li>
+        </ul>
+      </div>
+ 
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Nov 2016 — Apr 2023</div>
+        <div class="timeline-role">Head of Business Development</div>
+        <div class="timeline-company">Pecunia Asset Management <span>· Kuala Lumpur, Malaysia · Financial &amp; Insurance</span></div>
+        <ul class="timeline-bullets">
+          <li>Led business and technology initiatives supporting digital wealth management platforms and investment trading systems.</li>
+          <li>Managed software development teams responsible for building and enhancing digital trading platforms and investment management systems.</li>
+          <li>Oversaw the development and operation of digital trading platforms supporting investment transactions and portfolio management.</li>
+          <li>Collaborated with developers to enhance platform security, performance, and user experience.</li>
+          <li>Ensured regulatory compliance and implemented new features based on market and client demands.</li>
+        </ul>
+      </div>
+ 
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jan 2014 — Oct 2016</div>
+        <div class="timeline-role">Business Analyst</div>
+        <div class="timeline-company">Globeye (Labuan) Ltd <span>· Kuala Lumpur, Malaysia · Financial &amp; Insurance</span></div>
+        <ul class="timeline-bullets">
+          <li>Led business analysis for the development of digital investment and trading platforms.</li>
+          <li>Collaborated with software developers, UX designers, and financial experts to define product requirements and workflows.</li>
+          <li>Conducted in-depth market research and competitor analysis to optimize platform features and enhance user experience.</li>
+          <li>Gathered, analyzed, and documented business and technical requirements to drive development of scalable, high-performance trading solutions.</li>
+          <li>Facilitated Agile development processes, including backlog grooming, sprint planning, and stakeholder alignment.</li>
+        </ul>
+      </div>
+ 
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-period">Jan 2010 — Dec 2013</div>
+        <div class="timeline-role">Assistant Manager, Events &amp; Entertainment</div>
+        <div class="timeline-company">Minor Hotels <span>· Malaysia · Arts, Entertainment &amp; Recreation</span></div>
+        <ul class="timeline-bullets">
+          <li>Managed large-scale entertainment events and coordinated cross-functional operational teams.</li>
+        </ul>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- EDUCATION -->
+<section class="edu-section" id="education">
+  <div class="section-inner">
+    <div class="section-label reveal">Academic Background</div>
+    <h2 class="section-title reveal">Education &amp;<br><em>Certifications</em></h2>
+ 
+    <div class="edu-grid reveal">
+      <div class="edu-card">
+        <div class="edu-year">Jan 2025 — Mar 2026</div>
+        <div class="edu-degree">Master's Degree<br>Information Technology</div>
+        <div class="edu-institution">INTI International University · Malaysia<br>Field: Information &amp; Communication Technologies</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2022</div>
+        <div class="edu-degree">Computer Science<br>Certificate</div>
+        <div class="edu-institution">Harvard University · United States<br>Field: Computer Science</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2009</div>
+        <div class="edu-degree">Bachelor's Degree<br>International Tourism &amp; Marketing</div>
+        <div class="edu-institution">IMI International Management Institute Switzerland</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2024</div>
+        <div class="edu-degree">Professional<br>Development</div>
+        <div class="edu-institution">Jira Fundamentals · Atlassian<br>Six Sigma White Belt · CSSC</div>
+      </div>
+    </div>
+ 
+    <div class="section-label reveal" style="margin-bottom:2rem;">Professional Certifications</div>
+    <div class="cert-grid reveal">
+      <div class="cert-item">
+        <div class="cert-org">Amazon Web Services · 2023</div>
+        <div class="cert-name">AWS Certified SysOps Administrator – Associate</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">Amazon Web Services · 2023</div>
+        <div class="cert-name">AWS Certified Developer – Associate</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">Amazon Web Services · 2023</div>
+        <div class="cert-name">AWS Certified Solutions Architect – Associate</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">Amazon Web Services · 2023</div>
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">ISC2 · 2023</div>
+        <div class="cert-name">Certified in Cybersecurity (CC)</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">Atlassian · 2024</div>
+        <div class="cert-name">Jira Fundamentals</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">CSSC · 2024</div>
+        <div class="cert-name">Six Sigma White Belt</div>
+      </div>
+      <div class="cert-item">
+        <div class="cert-org">Harvard University · 2022</div>
+        <div class="cert-name">Computer Science Certificate</div>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+ 
+<!-- ABOUT / CONTACT -->
+<section class="about-section" id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">Personal Information</div>
+    <h2 class="section-title reveal">About &amp; <em>Contact</em></h2>
+ 
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="info-list">
+          <div class="info-item">
+            <div class="info-key">Location</div>
+            <div class="info-val">St. Mary Residence, Jalan Tengah, 50450, Kuala Lumpur, Malaysia</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Email</div>
+            <div class="info-val">yalkusovski@gmail.com</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Phone</div>
+            <div class="info-val">(+60) 146353392</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">LinkedIn</div>
+            <div class="info-val">linkedin.com/in/jane-a-18303b16b</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Date of Birth</div>
+            <div class="info-val">26 May 1988</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Nationality</div>
+            <div class="info-val">Macedonian / Citizen of the Republic of North Macedonia</div>
+          </div>
+          <div class="info-item">
+            <div class="info-key">Place of Birth</div>
+            <div class="info-val">Skopje, North Macedonia</div>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="reveal">
+        <div class="section-label" style="margin-bottom:2rem;">Language Proficiency</div>
+        <div class="lang-list">
+          <div class="lang-item">
+            <div class="lang-header">
+              <span class="lang-name">Macedonian</span>
+              <span class="lang-level">Native</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-header">
+              <span class="lang-name">English</span>
+              <span class="lang-level">C2 — Proficient</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-header">
+              <span class="lang-name">Serbian</span>
+              <span class="lang-level">B2 — Independent</span>
+            </div>
+            <div class="lang-bar"><div class="lang-fill" style="width:67%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-name">Jane Alkushovski</div>
+    <div class="footer-subtitle">VP Product &amp; Technology · Kuala Lumpur, Malaysia</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Jane Alkushovski</div>
+</footer>
+ 
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    setTimeout(() => {
+      ring.style.left = e.clientX + 'px';
+      ring.style.top = e.clientY + 'px';
+    }, 60);
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '56px'; ring.style.height = '56px';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px'; ring.style.height = '36px';
+    });
+  });
+ 
+  // Nav scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+  });
+ 
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+ 
+  document.querySelectorAll('.reveal, .timeline-item').forEach(el => observer.observe(el));
+ 
+  // Stagger timeline items
+  document.querySelectorAll('.timeline-item').forEach((item, i) => {
+    item.style.transitionDelay = (i * 0.1) + 's';
+  });
+</script>
+</body>
+</html>
