@@ -177,6 +177,23 @@
     display: flex; justify-content: center; align-items: center;
     opacity: 0; animation: fadeIn 1.2s 0.6s forwards;
   }
+  .hero-photo {
+  width: 280px; height: 280px;
+  border-radius: 0;
+  object-fit: cover; object-position: top;
+  border: 1px solid var(--border);
+  position: relative; z-index: 1;
+  filter: grayscale(20%);
+}
+.hero-photo-wrap {
+  position: relative; display: inline-block;
+}
+.hero-photo-wrap::before {
+  content: ''; position: absolute;
+  inset: -8px; border: 1px solid var(--gold);
+  opacity: 0.3; z-index: 0;
+  transform: translate(8px, 8px);
+}
   .hero-card {
     background: var(--card);
     border: 1px solid var(--border);
@@ -532,6 +549,9 @@
  
   <div class="hero-right">
     <div class="hero-card">
+      <div class="hero-photo-wrap" style="margin-bottom:2rem;">
+  <img src="https://media.licdn.com/dms/image/v2/D5603AQHQrEHTAZ899g/profile-displayphoto-scale_400_400/B56ZzRg87.GQAg-/0/1773041607994?e=1776902400&v=beta&t=GZNKtAarK8cRqrI5AwzyUiNdhPW5qp9Hf7CqB5Py4WY alt="Jane Alkushovski" class="hero-photo">
+</div>
       <div class="stat-grid">
         <div class="stat">
           <div class="stat-num">10+</div>
